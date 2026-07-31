@@ -7,12 +7,25 @@
 </head>
 <body>
   <h1>Sudoku Game</h1>
-  <div id="sudoku-board"></div>
   <div class="controls">
+    <label for="difficulty">Difficulty</label>
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium" selected>Medium</option>
+      <option value="hard">Hard</option>
+    </select>
     <button id="new-game">New Game</button>
     <button id="check-solution">Check Solution</button>
+    <button id="hint">Hint</button>
+    <button id="theme-toggle" type="button" aria-label="Switch to dark mode">Dark mode</button>
     <span id="message"></span>
+    <span id="timer">Time: 0s</span>
   </div>
-  <script src="/static/main.js"></script>
+  <div id="sudoku-board"></div>
+  <section class="leaderboard">
+    <h2>Top 10 Leaderboard</h2>
+    <ol id="leaderboard-list"></ol>
+  </section>
+  <script src="/static/main.js" defer></script>
 </body>
 </html>
