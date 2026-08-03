@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from starter import app as flask_app
@@ -63,3 +65,20 @@ def test_check_solution_requires_active_game(client):
     response = client.post('/check', json={'board': [[0] * 9 for _ in range(9)]})
     assert response.status_code == 400
     assert 'error' in response.get_json()
+
+
+def test_board_has_immediate_conflict_highlighting_logic():
+    js = Path('starter/static/main.js').read_text()
+
+    assert 'isCellConflict' in js
+    assert 'updateLiveConflictState' in js
+    assert 'classList.toggle(\'incorrect\'' in js
+
+
+def test_board_uses_3x3_block_alternating_colors():
+    css = Path('starter/static/styles.css').read_text()
+    js = Path('starter/static/main.js').read_text()
+
+    assert 'sudoku-cell.is-alt' in css
+    assert 'Math.floor(i / 3)' in js and 'Math.floor(j / 3)' in js
+    assert ' % 2' in js

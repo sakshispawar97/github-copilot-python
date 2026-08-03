@@ -81,7 +81,15 @@ h1, h2 {
     transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.sudoku-cell:focus {
+/* Alternate the nine 3x3 subgrids in a checkerboard pattern (A-B-A/B-A-B/A-B-A).
+   These state-specific backgrounds must still win when a cell is focused,
+   marked as a hint, marked incorrect, or is prefilled. */
+.sudoku-cell.is-alt {
+    background: var(--cell-alt);
+}
+
+.sudoku-cell:focus,
+.sudoku-cell.is-alt:focus {
     background: var(--cell-focus);
 }
 
@@ -98,11 +106,6 @@ h1, h2 {
 
 .sudoku-cell.incorrect {
     background: var(--cell-incorrect);
-}
-
-.sudoku-row:nth-child(odd) .sudoku-cell:nth-child(odd),
-.sudoku-row:nth-child(even) .sudoku-cell:nth-child(even) {
-    background: var(--cell-alt);
 }
 
 .sudoku-row:nth-child(odd) .sudoku-cell:nth-child(3n),
